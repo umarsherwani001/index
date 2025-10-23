@@ -622,8 +622,8 @@ Please use a modern browser like Chrome, Firefox, or Safari.`;
                     this.sessionId = `session-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
                     // Create new WebSocket connection with language parameter
                     const wsProtocol = location.protocol === 'https:' ? 'wss' : 'ws';
-                    // Use same host as the page; expect reverse proxy to route /ws to backend
-                    const wsUrl = `ws://40.172.226.4:8000/ws/transcribe/chunked?session_id=${this.sessionId}&language=${this.currentLanguage}`;
+                    // Use secure WebSocket for HTTPS pages
+                    const wsUrl = `${wsProtocol}://40.172.226.4:8000/ws/transcribe/chunked?session_id=${this.sessionId}&language=${this.currentLanguage}`;
                     console.log("🔌 Creating fresh WebSocket connection with session:", this.sessionId, "url:", wsUrl);
                     this.socket = new WebSocket(wsUrl);
 
